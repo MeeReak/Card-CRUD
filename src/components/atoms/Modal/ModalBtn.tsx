@@ -1,12 +1,14 @@
 "use client";
 
 import { ReactNode, useState } from "react";
+import { motion } from "framer-motion"; // import motion from framer-motion
+
 interface ModalProps {
   children?: ReactNode;
-  selectCard: string;
+  selectCard?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ children }) => {
+const Modal: React.FC<ModalProps> = ({ children, selectCard }) => {
   const [isShowModal, setIsShowModal] = useState(false);
 
   return (
@@ -15,24 +17,28 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
         className="fixed right-[10px] bottom-[10px] bg-pink-500 p-5 rounded-full"
         onClick={() => setIsShowModal(true)}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6 text-white"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 4.5v15m7.5-7.5h-15"
-          />
-        </svg>
+        {selectCard ? (
+          "Edit"
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6 text-white"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+        )}
       </button>
       {isShowModal && (
         <>
-          <div
+          <motion.div // use motion.div instead of div
             initial={{ x: "100%" }}
             animate={{
               x: 0,
@@ -41,11 +47,11 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
               x: "100%",
             }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed bg-pink-300 text-white shadow-lg top-0 right-0 w-full max-w-sm h-screen p-5"
+            className=" fixed bg-pink-300 text-white shadow-lg top-0 right-0 w-full max-w-sm h-screen p-5"
           >
             <button
               onClick={() => setIsShowModal((sideBar) => !sideBar)}
-              className="bg-white text-black h-10 w-10 block rounded-full"
+              className="bg-white text-pink-500 p-5 block rounded-full "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +69,7 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
               </svg>
             </button>
             <div>{children}</div>
-          </div>
+          </motion.div>
         </>
       )}
     </>

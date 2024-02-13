@@ -25,10 +25,14 @@ const Display = () => {
 
   return (
     <>
-      <Modal>
+      <Modal selectCard={selectCard}>
         <FormAdd setInfo={setInfo} />
       </Modal>
-      <CardList info={info} onSelectCard={setSelectCard}/>
+      <CardList
+        info={info}
+        selectCard={selectCard}
+        onSelectCard={setSelectCard}
+      />
 
       {/* <div className="flex flex-col">
         {value && <Modal setInfo={setInfo} />}

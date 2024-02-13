@@ -6,11 +6,34 @@ interface CardProps {
   alt?: string;
   name?: string;
   age?: string;
+  onSelectCard?: (age: string) => void;
+  selectCard?: string;
 }
 
-const Card: React.FC<CardProps> = ({ src = "", alt = "", name = "", age , onSelectCard}) => {
+const Card: React.FC<CardProps> = ({
+  src = "",
+  alt = "",
+  name = "",
+  age = "",
+  onSelectCard,
+  selectCard,
+}) => {
   return (
-    <div className="border border-pink-400 bg-pink-100 rounded-md shadow-md">
+    <div
+      onClick={() => {
+        if (onSelectCard) {
+          onSelectCard(name);
+          if (selectCard === name) {
+            onSelectCard("");
+          }
+        }
+      }}
+      className={
+        selectCard === name
+          ? "border border-yellow-400 bg-yellow-100 rounded-md shadow-md"
+          : "border border-pink-400 bg-pink-100 rounded-md shadow-md"
+      }
+    >
       <div className="relative space-x-2 flex items-center  w-[400px] p-4 ">
         <Image
           src={src}

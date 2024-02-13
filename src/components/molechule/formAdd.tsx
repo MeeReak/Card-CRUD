@@ -1,7 +1,11 @@
 "use client";
 import React, { useState } from "react";
 
-const FormAdd = ({ setInfo }) => {
+interface FormAddProps {
+  setInfo: (value: any) => void;
+}
+
+const FormAdd:React.FC<FormAddProps> = ({ setInfo }) => {
   const [value, setValue] = useState({
     name: "",
     age: "",
@@ -18,16 +22,16 @@ const FormAdd = ({ setInfo }) => {
 
   const [file, setFile] = useState(null);
 
-  function handleFileChange(e) {
-    const selectedFile = e.target.files[0];
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const selectedFile = e.target.files?.[0];
     setFile(selectedFile);
   }
 
-  function handleCreate(e) {
+  function handleCreate(e: React.FormEvent<HTMLButtonElement>) {
     e.preventDefault();
     setInfo((preList: any) => [
       ...preList,
-      { ...value, src: URL.createObjectURL(file) },
+      { ...value, src: file ? URL.createObjectURL(file) : null },
     ]);
 
     console.log(value);
@@ -40,20 +44,20 @@ const FormAdd = ({ setInfo }) => {
   }
 
   return (
-    <div className="absolute   top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  p-8 rounded-lg shadow-lg">
+    <div className="absolute border  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  p-8 rounded-lg shadow-lg">
       <div className="w-64">
         <div className="mb-4">
           <label
             htmlFor="name"
             className="block text-sm font-semibold text-gray-700"
           >
-            Name:
+            Name
           </label>
           <input
             id="name"
             type="text"
             name="name"
-            className="w-full mt-1 p-2 border-b-2 border-pink-300 focus:outline-none focus:border-pink-500"
+            className="w-full mt-1 p-2 border-b-2 text-black border-pink-300 focus:outline-none focus:border-pink-500"
             onChange={handleChange}
           />
         </div>
@@ -63,12 +67,12 @@ const FormAdd = ({ setInfo }) => {
             htmlFor="age"
             className="block text-sm font-semibold text-gray-700"
           >
-            Age:
+            Age
           </label>
           <input
             type="text"
             id="age"
-            className="w-full mt-1 p-2 border-b-2 border-pink-300 focus:outline-none focus:border-pink-500"
+            className="w-full mt-1 p-2 border-b-2 border-pink-300 text-black focus:outline-none focus:border-pink-500"
             name="age"
             onChange={handleChange}
           />
@@ -79,7 +83,7 @@ const FormAdd = ({ setInfo }) => {
             htmlFor="src"
             className="block text-sm font-semibold text-gray-700"
           >
-            File:
+            File
           </label>
           <input
             type="file"
