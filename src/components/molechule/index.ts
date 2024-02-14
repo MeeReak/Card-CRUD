@@ -1,3 +1,4 @@
 import FormAdd from "./formAdd";
+import FormUpdate from "./formUpdate";
 
-export {FormAdd}
+export {FormAdd, FormUpdate}

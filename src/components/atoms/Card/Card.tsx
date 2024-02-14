@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 interface CardProps {
+  id?: string;
   src?: string;
   alt?: string;
   name?: string;
@@ -11,6 +12,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({
+  id = "",
   src = "",
   alt = "",
   name = "",
@@ -22,14 +24,14 @@ const Card: React.FC<CardProps> = ({
     <div
       onClick={() => {
         if (onSelectCard) {
-          onSelectCard(name);
-          if (selectCard === name) {
+          onSelectCard(id);
+          if (selectCard === id) {
             onSelectCard("");
           }
         }
       }}
       className={
-        selectCard === name
+        selectCard === id
           ? "border border-yellow-400 bg-yellow-100 rounded-md shadow-md"
           : "border border-pink-400 bg-pink-100 rounded-md shadow-md"
       }
