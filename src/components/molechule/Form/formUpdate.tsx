@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 interface FormAddProps {
   onSetInfo: (value: any) => void;
+  editCard: any; 
 }
 
 const FormUpdate: React.FC<FormAddProps> = ({ onSetInfo, editCard }) => {
@@ -29,14 +30,13 @@ const FormUpdate: React.FC<FormAddProps> = ({ onSetInfo, editCard }) => {
 
   function handUpdate(e: React.FormEvent<HTMLButtonElement>) {
     e.preventDefault();
-    // Logic to update the value based on the selected card
 
     onSetInfo((preList: any) => {
       const updatedList = preList.map((item: any) => {
-        if (item.name === value.name) {
+        if (item.id === editCard.id) {
           return {
             ...item,
-            age: value.age,
+            ...value,
             src: file ? URL.createObjectURL(file) : null,
           };
         }
@@ -45,7 +45,6 @@ const FormUpdate: React.FC<FormAddProps> = ({ onSetInfo, editCard }) => {
       return updatedList;
     });
   }
-
 
   return (
     <div className="absolute border  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  p-8 rounded-lg shadow-lg">
@@ -99,6 +98,7 @@ const FormUpdate: React.FC<FormAddProps> = ({ onSetInfo, editCard }) => {
             onChange={handleFileChange}
           />
         </div>
+        {/* <img src={value.src} alt="" /> */}
 
         <button
           className="bg-pink-500 text-white py-2 px-4 rounded-md hover:bg-pink-600 focus:outline-none"

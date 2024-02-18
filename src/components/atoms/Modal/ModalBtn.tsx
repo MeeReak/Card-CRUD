@@ -6,10 +6,21 @@ import { motion } from "framer-motion"; // import motion from framer-motion
 interface ModalProps {
   children?: ReactNode;
   selectCard?: string;
+  location?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ children, selectCard }) => {
+const Modal: React.FC<ModalProps> = ({
+  children,
+  selectCard,
+  location = "",
+}) => {
   const [isShowModal, setIsShowModal] = useState(false);
+
+  // const getLocalShema = (location: string) => {
+  //   switch (location) {
+  //     case "left":
+  //       return 
+  // };
 
   return (
     <>

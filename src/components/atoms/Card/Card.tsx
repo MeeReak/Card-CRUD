@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface CardProps {
   id?: string;
@@ -7,8 +8,10 @@ interface CardProps {
   alt?: string;
   name?: string;
   age?: string;
-  onSelectCard?: (age: string) => void;
+  onSelectCard?: (id: string) => void;
   selectCard?: string;
+  info: any;
+  onSetInfo: any;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -19,7 +22,15 @@ const Card: React.FC<CardProps> = ({
   age = "",
   onSelectCard,
   selectCard,
+  info,
+  onSetInfo,
 }) => {
+  const deleteCard = () => {
+    const newInfo = info.filter((card: { id: string }) => card.id !== id);
+    console.log(selectCard);
+
+    onSetInfo(newInfo);
+  };
   return (
     <div
       onClick={() => {
@@ -44,7 +55,13 @@ const Card: React.FC<CardProps> = ({
           height={100}
           className="rounded-full"
         />
-        <button className="text-pink-500 hover:text-pink-700 focus:outline-none">
+        <button
+          onClick={(e) => {
+            deleteCard();
+            e.stopPropagation();
+          }}
+          className="text-pink-500 hover:text-pink-700 focus:outline-none"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -61,10 +78,10 @@ const Card: React.FC<CardProps> = ({
           </svg>
         </button>
         <div className="space-y-1">
-          <h2 className="text-xl font-bold">Name: {name}</h2>
+          <h2 className="text-xl font-bold">{name}</h2>
           <p className="text-gray-600">Age: {age}</p>
           <button className="bg-pink-500 text-white hover:bg-pink-700 px-4 py-2 rounded-md  transition duration-300 ease-in-out">
-            Preview
+            <Link href={`/${name}`}>Preview</Link>
           </button>
         </div>
       </div>

@@ -37,7 +37,6 @@ const FormAdd: React.FC<FormAddProps> = ({ setInfo }) => {
       { ...value, id: newUser, src: file ? URL.createObjectURL(file) : null },
     ]);
 
-    console.log(value);
     setValue({
       id: "",
       name: "",
