@@ -19,6 +19,8 @@ interface Item {
 const CardList = ({ info, onSelectCard, selectCard, Key, onSetInfo }: CardList) => {
   return (
     <div className="flex items-center justify-center flex-col gap-3">
+      
+      {/* if the user search for a card the card will be filtered and if not the card will be displayed */}
       {Key
         ? info
             .filter((item: Item) =>

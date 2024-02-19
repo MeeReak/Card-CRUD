@@ -25,15 +25,16 @@ const Card: React.FC<CardProps> = ({
   info,
   onSetInfo,
 }) => {
+  //this function delete the card
   const deleteCard = () => {
     const newInfo = info.filter((card: { id: string }) => card.id !== id);
-    console.log(selectCard);
-
     onSetInfo(newInfo);
   };
+  
   return (
     <div
       onClick={() => {
+        //if the user click on the card the card will be selected
         if (onSelectCard) {
           onSelectCard(id);
           if (selectCard === id) {
@@ -42,6 +43,7 @@ const Card: React.FC<CardProps> = ({
         }
       }}
       className={
+        //if the card is selected the card will be yellow and if not the card will be pink
         selectCard === id
           ? "border border-yellow-400 bg-yellow-100 rounded-md shadow-md"
           : "border border-pink-400 bg-pink-100 rounded-md shadow-md"

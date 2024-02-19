@@ -10,6 +10,8 @@ import {
 import React, { useState } from "react";
 
 const Display = () => {
+
+  //this state store info like name, age and src
   const [info, setInfo] = useState([
     {
       id: "1",
@@ -30,10 +32,14 @@ const Display = () => {
       age: "20",
     },
   ]);
+
+  //this state store the id of the selected card 
   const [selectCard, setSelectCard] = useState("");
 
-  const [key, setKey] = useState(""); 
+  //this state store the key of the search input
+  const [key, setKey] = useState("");
 
+  //this function filter the card that the user select
   const editCard = info.filter((card) => {
     if (card.id === selectCard) {
       return card;
@@ -43,6 +49,7 @@ const Display = () => {
   return (
     <>
       <Modal selectCard={selectCard}>
+        {/* if the user select a card the form will be updated with the card info and if user unselect a card the form will add */}
         {selectCard ? (
           <FormUpdate editCard={editCard[0]} onSetInfo={setInfo} />
         ) : (
@@ -52,6 +59,7 @@ const Display = () => {
 
       <InputSearch onSetKey={setKey} />
 
+      {/* this component display the card list */}
       <CardList
         onSetInfo={setInfo}
         Key={key}

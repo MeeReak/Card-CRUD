@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 interface FormAddProps {
   onSetInfo: (value: any) => void;
-  editCard: any; 
+  editCard: any;
 }
 
 const FormUpdate: React.FC<FormAddProps> = ({ onSetInfo, editCard }) => {
@@ -21,23 +21,30 @@ const FormUpdate: React.FC<FormAddProps> = ({ onSetInfo, editCard }) => {
     setValue((prevValue) => ({ ...prevValue, [name]: value }));
   }
 
-  const [file, setFile] = useState(null);
-
+  //
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const selectedFile = e.target.files?.[0];
-    setFile(selectedFile);
+
+    if (!selectedFile) {
+      return;
+    }
+
+    if (selectedFile) {
+      const imgUrl = URL.createObjectURL(selectedFile);
+      setValue((preValue) => ({ ...preValue, src: imgUrl }));
+    }
   }
 
+  //this function update the card info
   function handUpdate(e: React.FormEvent<HTMLButtonElement>) {
     e.preventDefault();
-
+    
     onSetInfo((preList: any) => {
       const updatedList = preList.map((item: any) => {
         if (item.id === editCard.id) {
           return {
             ...item,
             ...value,
-            src: file ? URL.createObjectURL(file) : null,
           };
         }
         return item;

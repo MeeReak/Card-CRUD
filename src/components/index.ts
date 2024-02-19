@@ -1,3 +1,3 @@
 export * from "./atoms";
 export * from "./organisim";
-export * from "./molechule/Form";
+export * from "./molechule";
