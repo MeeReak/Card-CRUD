@@ -4,6 +4,7 @@ import React from "react";
 
 interface InputSearchProps {
   onSetKey?: (key: string) => void;
+  
 }
 
 const InputSearch: React.FC<InputSearchProps> = ({ onSetKey }) => {

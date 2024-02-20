@@ -23,7 +23,6 @@ const FormAdd: React.FC<FormAddProps> = ({ setInfo }) => {
     validateForm(e.target.name, e.target.value);
   }
 
-
   //this state store the error of the input
   const [errors, setErrors] = useState({
     name: "",
@@ -52,7 +51,6 @@ const FormAdd: React.FC<FormAddProps> = ({ setInfo }) => {
       const imgUrl = URL.createObjectURL(selectedFile);
       setValue((preValue) => ({ ...preValue, src: imgUrl }));
     }
-  
   }
 
   async function handleCreate(e: React.FormEvent<HTMLButtonElement>) {
@@ -69,10 +67,7 @@ const FormAdd: React.FC<FormAddProps> = ({ setInfo }) => {
 
       const newId = Math.random().toString(36).substring(2, 8); // return 1f74e
       const newUser = { ...value, id: newId };
-      setInfo((preList: any) => [
-        ...preList,
-        { ...value, id: newUser,},
-      ]);
+      setInfo((preList: any) => [...preList, { ...value, id: newUser }]);
     } catch (err) {
       console.log("error", err);
       const fieldErrors: { [key: string]: string } = {};
@@ -88,6 +83,7 @@ const FormAdd: React.FC<FormAddProps> = ({ setInfo }) => {
       }));
       return;
     }
+    
   }
 
   return (

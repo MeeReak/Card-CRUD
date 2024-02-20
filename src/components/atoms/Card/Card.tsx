@@ -30,7 +30,7 @@ const Card: React.FC<CardProps> = ({
     const newInfo = info.filter((card: { id: string }) => card.id !== id);
     onSetInfo(newInfo);
   };
-  
+
   return (
     <div
       onClick={() => {
@@ -45,8 +45,8 @@ const Card: React.FC<CardProps> = ({
       className={
         //if the card is selected the card will be yellow and if not the card will be pink
         selectCard === id
-          ? "border border-yellow-400 bg-yellow-100 rounded-md shadow-md"
-          : "border border-pink-400 bg-pink-100 rounded-md shadow-md"
+          ? "border border-yellow-400 bg-yellow-100 rounded-md shadow-md "
+          : "border border-pink-400 bg-pink-100 rounded-md shadow-md "
       }
     >
       <div className="relative space-x-2 flex items-center  w-[400px] p-4 ">
